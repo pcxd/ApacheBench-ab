@@ -1,0 +1,28 @@
+This is a tool to install Apache Bench (ab) without installing apache.
+
+
+INSTALLATION:
+
+1.run install_first.sh to install apr and apr-util.
+    ./install_first.sh
+
+2.add the path of apr-1.pc to PKG_CONFIG_PATH, make sure that system can find apr-1.pc by searching PKG_CONFIG_PATH.
+    export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:`pwd`/apr/lib/pkgconfig/
+    
+    another way is to creat a link file in /usr/lib/pkgconfig:
+    sudo ln -s `pwd`/apr/lib/pkgconfig/apr-1.pc /usr/local/lib/pkgconfig/apr-1.pc
+    
+    test the installation of apr, apr-util
+    make apr-skeleton
+    ldd apr-skeleton
+
+3.compile src/ab.c and test ab. 
+    make ab
+    ldd ab
+    ./ab -V
+
+
+source files in src/:
+    ab.c:               ab source code.
+    ap_release.h:       head file for ab.c.
+    apr-skeleton.c:     a simple apr based program. 
